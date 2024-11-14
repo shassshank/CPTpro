@@ -1,0 +1,19 @@
+{% extends "layout.html" %} 
+{% block content %}
+<body>
+    <div class="container-fluid">
+        <div class="middle-content" id="getupload">
+            <h2>Please upload a headshot with bright lighting in front of a white backgroud. <br> Upload only a .jpg or .jpeg filetype.</h2>
+            <br>
+            <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_photo') }}">
+                <input type="file" name="upload"accept="*.jpg"/>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <form method="POST" action="{{ url_for('back') }}">
+        <button type="submit" name="back" class="btn btn-primary backbutton">Back</button>
+        <input type="hidden" name="action" value="submit">
+    </form>
+</body>
+{% endblock %}

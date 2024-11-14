@@ -1,0 +1,16 @@
+{% extends "layout.html" %} 
+{% block content %}
+<body>
+    <div class="container-fluid">
+            <div class="content" id="homecontent">
+                <!-- <h1>CPTpro</h1> -->
+                <img id="logo" src="./static/Designer.jpeg" />
+                <p class="padding_front_pg"> </p>
+                <form method="POST" action="{{ url_for('submit_form') }}">
+                    <button type="submit" name="nextpg" class="btn btn-primary">Try it out!</button>
+                    <input type="hidden" name="action" value="submit">
+                </form>
+            </div>
+    </div>
+</body>
+{% endblock %}

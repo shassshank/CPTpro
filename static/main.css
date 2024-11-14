@@ -1,0 +1,114 @@
+/* General styles for centering and layout */
+body, html {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    background-color: #bfbfbf;
+}
+
+div{
+    
+    
+}
+
+.container-fluid {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.middle-content, .content {
+    border-radius: 18px;
+    background-color: #fff;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px 0;
+    padding: 20px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    justify-content: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#logo {
+    width: -webkit-fill-available;
+    border-radius: 6px;
+    max-width: 40vw;
+    margin-bottom: 25%;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+    .middle-content, .content {
+        width: 100%;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .middle-content, .content {
+        padding: 10px;
+        font-size: 0.9em;
+    }
+}
+
+.backbutton {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+
+#userphoto{
+    max-width: 40vw;
+    max-height: 25vh;
+    height: auto;
+}
+
+#hair{
+    max-width: 40vw;
+    height: auto;
+}
+
+#forehead{
+    max-width: 20vw;
+    max-height: 5vh;
+    height: auto;
+}
+
+.eye{
+    width: 15%;
+    max-width: 10vw;
+    max-height: 10vh;
+    height: auto;
+}
+
+.cheek{
+    width: 15%;
+    max-width: 10vw;
+    max-height: 10vh;
+    height: auto;
+}
+
+.colorcircle{
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+}
+
+.circlebox{
+    max-width: min-content;
+}
