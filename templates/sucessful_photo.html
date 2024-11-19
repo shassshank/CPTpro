@@ -12,7 +12,7 @@
 <body>
     <div class="container-fluid">
         <div class="middle-content" id="getupload">
-            <h2>Please upload a headshot with bright lighting in front of a white backgroud. <b></b> Upload on a .jpg or .jpeg filetype.</h2>
+            <h2>Please upload a headshot with bright lighting in front of a white backgroud. <b></b> Upload a .jpg or .jpeg filetype.</h2>
             <br>
             <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_photo') }}">
                 <input type="file" name="upload"accept="*.jpg"/>
@@ -32,7 +32,7 @@
                 <td><img src="data:image/jpeg;base64,{{cheek_left}}" class="cheek"></td> <b></b> <td><img src="data:image/jpeg;base64,{{cheek_right}}" class="cheek"></td>
                 <br>
                 <div class="padding text-center" id="place" style="background-color: white;">
-                    <h2>Click here to get your color analysis!</h2>
+                    <h2>Click to see the right colors for you!</h2>
                     <form method="POST" action="{{ url_for('color_analysis') }}">
                         <button type="submit" name="c_a" class="btn btn-primary">Analyze Me</button>
                         <input type="hidden" name="action" value="submit">
