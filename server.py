@@ -8,7 +8,7 @@ from flask import Response, request, jsonify, redirect, url_for, session
 import os
 import cv2
 from werkzeug.utils import secure_filename
-
+from datetime import datetime
 
 app = Flask(__name__)
 app.secret_key = "sk"
@@ -145,6 +145,66 @@ colors = {'Winter': {
     'Gold-tone Accessories': '#B49B57'
 }}
 
+
+# Define the path to save images
+IMAGE_SAVE_PATH = "./static/images/"
+
+# Ensure the folder exists
+os.makedirs(IMAGE_SAVE_PATH, exist_ok=True)
+
+@app.route("/upload_captured_photo", methods=["POST"])
+def upload_captured_photo():
+    if request.method == "POST":
+        captured_photo_data = request.form.get("captured_photo")
+        if captured_photo_data:
+            # Decode the base64 data to binary
+            captured_photo_data = captured_photo_data.split(",")[1]
+            img_data = base64.b64decode(captured_photo_data)
+
+            # Save the image to the static folder
+            now = datetime.now()
+            formatted_time = now.strftime("%Y%m%d%H%M%S%f")
+            img_filename = "captured_image" + formatted_time +".jpg"
+            img_path = os.path.join(IMAGE_SAVE_PATH, img_filename)
+            with open(img_path, "wb") as f:
+                f.write(img_data)
+
+            # Store the image path in the session
+            session["uploaded_img_file_path"] = os.path.join(
+            "./static/images/", img_filename
+            )
+            global data
+            data = facial_features.facial_features_and_values(
+            f"static/images/{img_filename}", False, True, 1
+            )
+            _, buffer = cv2.imencode(".jpg", data["eye_left"])
+            eye_left = base64.b64encode(buffer).decode("utf-8")
+            _, buffer = cv2.imencode(".jpg", data["eye_right"])
+            eye_right = base64.b64encode(buffer).decode("utf-8")
+            _, buffer = cv2.imencode(".jpg", data["forehead"])
+            forehead = base64.b64encode(buffer).decode("utf-8")
+            _, buffer = cv2.imencode(".jpg", data["cheek_right"])
+            cheek_right = base64.b64encode(buffer).decode("utf-8")
+            _, buffer = cv2.imencode(".jpg", data["cheek_left"])
+            cheek_left = base64.b64encode(buffer).decode("utf-8")
+            _, buffer = cv2.imencode(".jpg", data["hair_mask"])
+            hair_mask = base64.b64encode(buffer).decode("utf-8")
+
+            return render_template(
+                "sucessful_photo.html",
+                user_image=img_path,
+                forehead=forehead,
+                eye_left=eye_left,
+                eye_right=eye_right,
+                cheek_left=cheek_left,
+                cheek_right=cheek_right,
+                hair_mask=hair_mask,
+            )
+    
+        return "Failed to upload photo", 400
+            # return redirect(url_for("get_photo"))
+    return "Failed to upload photo", 400
+
 # ROUTES
 @app.route("/")
 def home():
@@ -176,7 +236,7 @@ def upload_photo():
         img_path = session.get("uploaded_img_file_path", None)
 
         data = facial_features.facial_features_and_values(
-            f"static/images/{img_filename}", True, True, 1
+            f"static/images/{img_filename}", False, True, 1
         )
         _, buffer = cv2.imencode(".jpg", data["eye_left"])
         eye_left = base64.b64encode(buffer).decode("utf-8")
