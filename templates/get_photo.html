@@ -1,13 +1,32 @@
+
 {% extends "layout.html" %} 
 {% block content %}
 <body>
-    <div class="container-fluid">
+    <div class="container-fluid" id="outercontainer">
         <div class="middle-content" id="getupload">
-            <h2>Please upload a headshot with bright lighting in front of a white backgroud. <br> Upload only a .jpg or .jpeg filetype.</h2>
-            <br>
+
+            <h3>Please upload/take a headshot with bright lighting in front of a white backgroud.</h3> <h8>Upload only a .jpg filetype.</h8>
+            <br><br>
             <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_photo') }}">
                 <input type="file" name="upload"accept="*.jpg"/>
                 <input type="submit" value="Submit">
+            </form>
+
+            <br>or<br><br>
+
+            <!-- <h2>Take a headshot with bright lighting in front of a white background.</h2>
+            <br> -->
+            <div>
+                <video id="webcam" autoplay style="transform: scaleX(-1); max-width: -webkit-fill-available;"></video>
+                <canvas id="canvas" style="display: none;"></canvas>
+                <br><br>
+                <button id="captureButton">Capture Photo</button>
+                <br>
+                <img id="capturedImage" src="" alt="Captured Image" style="display: none; margin-top: 10px;transform: scaleX(1); max-width: -webkit-fill-available;" />
+            </div>
+            <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_captured_photo') }}">
+                <input type="hidden" name="captured_photo" id="captured_photo">
+                <input type="submit" value="Submit" id="submitButton" style="display: none; margin-top: 10px;">
             </form>
         </div>
     </div>
@@ -15,5 +34,41 @@
         <button type="submit" name="back" class="btn btn-primary backbutton">Back</button>
         <input type="hidden" name="action" value="submit">
     </form>
+
+    <script>
+        const webcamElement = document.getElementById('webcam');
+        const canvasElement = document.getElementById('canvas');
+        const captureButton = document.getElementById('captureButton');
+        const capturedImage = document.getElementById('capturedImage');
+        const capturedPhotoInput = document.getElementById('captured_photo');
+        const submitButton = document.getElementById('submitButton');
+
+        // Access webcam
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(stream => {
+                webcamElement.srcObject = stream;
+            })
+            .catch(err => {
+                console.error("Error accessing webcam: ", err);
+            });
+
+        // Capture photo
+        captureButton.addEventListener('click', () => {
+            const context = canvasElement.getContext('2d');
+            canvasElement.width = webcamElement.videoWidth;
+            canvasElement.height = webcamElement.videoHeight;
+            context.translate(canvasElement.width, 0);
+            context.scale(-1, 1);
+            context.drawImage(webcamElement, 0, 0, canvasElement.width, canvasElement.height);
+
+            // Convert to data URL and show the captured image
+            const imageDataURL = canvasElement.toDataURL('image/jpeg');
+            capturedImage.src = imageDataURL;
+            capturedImage.style.display = 'block';
+            capturedPhotoInput.value = imageDataURL;
+            submitButton.style.display = 'inline';
+        });
+    </script>
 </body>
 {% endblock %}
+

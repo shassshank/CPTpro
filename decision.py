@@ -323,7 +323,7 @@ def load(file="predict_season.h5"):
     return load_model(file)
 
 
-def predict_image(image, data=None, file="best.h5"):
+def   predict_image(image, data=None, file="best.h5"):
     """
     Takes in either an image path or image data and runs
     it through the neural network to get a season prediction.

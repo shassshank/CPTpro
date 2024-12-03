@@ -51,6 +51,11 @@ form {
     margin-bottom: 25%;
 }
 
+#outercontainer {
+    max-width: 100vw;
+    height: auto;
+}
+
 /* Media queries for smaller screens */
 @media (max-width: 768px) {
     .middle-content, .content {
