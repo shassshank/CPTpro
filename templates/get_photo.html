@@ -9,7 +9,7 @@
             <br><br>
             <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_photo') }}">
                 <input type="file" name="upload"accept="*.jpg"/>
-                <input type="submit" value="Submit">
+                <input type="submit" class="btn btn-primary" value="Submit">
             </form>
 
             <br>or<br><br>
@@ -20,13 +20,13 @@
                 <video id="webcam" autoplay style="transform: scaleX(-1); max-width: -webkit-fill-available;"></video>
                 <canvas id="canvas" style="display: none;"></canvas>
                 <br><br>
-                <button id="captureButton">Capture Photo</button>
+                <button id="captureButton" class="btn btn-primary">Capture Photo</button>
                 <br>
                 <img id="capturedImage" src="" alt="Captured Image" style="display: none; margin-top: 10px;transform: scaleX(1); max-width: -webkit-fill-available;" />
             </div>
             <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_captured_photo') }}">
                 <input type="hidden" name="captured_photo" id="captured_photo">
-                <input type="submit" value="Submit" id="submitButton" style="display: none; margin-top: 10px;">
+                <input type="submit" class="btn btn-primary" value="Submit" id="submitButton" style="display: none; margin-top: 10px;">
             </form>
         </div>
     </div>

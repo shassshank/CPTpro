@@ -331,7 +331,7 @@ def   predict_image(image, data=None, file="best.h5"):
 
     network = load(file)
     if data == None:
-        data = ff.facial_features_and_values(image, True, True, 1)
+        data = ff.facial_features_and_values(image, False, True, 1)
 
     test_data = [
         # data["skin_lab"][0],

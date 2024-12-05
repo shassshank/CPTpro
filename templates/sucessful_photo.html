@@ -16,7 +16,7 @@
             <br>
             <form method="POST" enctype="multipart/form-data" action="{{ url_for('upload_photo') }}">
                 <input type="file" name="upload"accept="*.jpg"/>
-                <input type="submit" value="Submit">
+                <input type="submit" class="btn btn-primary" value="Submit">
             </form>
             <h2>Photo uploaded sucessfully!</h2>
             <img src="{{ user_image }}" alt="User photo" id="userphoto" >
@@ -29,7 +29,7 @@
                 <br>
                 <td><img src="data:image/jpeg;base64,{{eye_left}}" class="eye"></td> <b></b> <td><img src="data:image/jpeg;base64,{{eye_right}}" class="eye"></td>
                 <br>
-                <td><img src="data:image/jpeg;base64,{{cheek_left}}" class="cheek"></td> <b></b> <td><img src="data:image/jpeg;base64,{{cheek_right}}" class="cheek"></td>
+                <td><img src="data:image/jpeg;base64,{{cheek_left}}" id="rightcheek" class="cheek"></td> <b></b> <td><img src="data:image/jpeg;base64,{{cheek_right}}" class="cheek"></td>
                 <br>
                 <div class="padding text-center" id="place" style="background-color: white;">
                     <h2>Click to see the right colors for you!</h2>

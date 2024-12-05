@@ -8,10 +8,6 @@ body, html {
     background-color: #bfbfbf;
 }
 
-div{
-    
-    
-}
 
 .container-fluid {
     display: flex;
@@ -54,6 +50,10 @@ form {
 #outercontainer {
     max-width: 100vw;
     height: auto;
+}
+
+#rightcheek{
+    margin-right: 10%;
 }
 
 /* Media queries for smaller screens */
@@ -109,8 +109,8 @@ form {
 }
 
 .colorcircle{
-    width: 50px;
-    height: 50px;
+    width: 60px;
+    height: 60px;
     margin: 0 auto;
 }
 
