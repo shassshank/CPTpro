@@ -18,3 +18,6 @@ cv2
 flask
 cmake
 dlib
+
+To run the project - Run the following command on the terminal
+python server.py 
